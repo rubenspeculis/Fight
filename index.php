@@ -44,23 +44,28 @@
   <script src="js/libs/modernizr-2.0.6.min.js"></script>
   
   <SCRIPT>
+  
+  if ((NewCount2 == 1) && (NewCount == 2))
+{
+$('#submit').addClass('displayed');
+}
 
 function KeepCount() {
 
 var NewCount = 0
 
-if (document.stalist.NSW.checked) {NewCount = NewCount + 1}
-if (document.stalist.VIC.checked) {NewCount = NewCount + 1}
-if (document.stalist.QLD.checked) {NewCount = NewCount + 1}
-if (document.stalist.SA.checked) {NewCount = NewCount + 1}
-if (document.stalist.WA.checked) {NewCount = NewCount + 1}
-if (document.stalist.TAS.checked) {NewCount = NewCount + 1}
-if (document.stalist.NT.checked) {NewCount = NewCount + 1}
-if (document.stalist.ACT.checked) {NewCount = NewCount + 1}
+if (document.stalist.NSW.checked) {NewCount = NewCount + 1;}
+if (document.stalist.VIC.checked) {NewCount = NewCount + 1;}
+if (document.stalist.QLD.checked) {NewCount = NewCount + 1;}
+if (document.stalist.SA.checked) {NewCount = NewCount + 1;}
+if (document.stalist.WA.checked) {NewCount = NewCount + 1;}
+if (document.stalist.TAS.checked) {NewCount = NewCount + 1;}
+if (document.stalist.NT.checked) {NewCount = NewCount + 1;}
+if (document.stalist.ACT.checked) {NewCount = NewCount + 1;}
 
 if (NewCount == 3)
 {
-alert('Pick Just Two Please')
+alert('Please only select two states!')
 document.stalist; return false;
 }
 } 
@@ -69,19 +74,21 @@ function KeepCount2() {
 
 var NewCount2 = 0
 
-if (document.stalist.ind1.checked) {NewCount = NewCount2 + 1}
-if (document.stalist.ind2.checked) {NewCount = NewCount2 + 1}
-if (document.stalist.ind3.checked) {NewCount = NewCount2 + 1}
-if (document.stalist.ind4.checked) {NewCount = NewCount2 + 1}
-if (document.stalist.ind5.checked) {NewCount = NewCount2 + 1}
-if (document.stalist.ind6.checked) {NewCount = NewCount2 + 1}
+if (document.stalist.ind1.checked) {NewCount2 = NewCount2 + 1}
+if (document.stalist.ind2.checked) {NewCount2 = NewCount2 + 1}
+if (document.stalist.ind3.checked) {NewCount2 = NewCount2 + 1}
+if (document.stalist.ind4.checked) {NewCount2 = NewCount2 + 1}
+if (document.stalist.ind5.checked) {NewCount2 = NewCount2 + 1}
+if (document.stalist.ind6.checked) {NewCount2 = NewCount2 + 1}
 
-if (NewCount == 2)
+if (NewCount2 == 2)
 {
-alert('Pick Just Two Please')
+$('#submit').addClass('displayed');
+alert('Please only select one weapon!')
 document.stalist; return false;
 }
-} 
+}
+
 </SCRIPT>
   
 </head>
@@ -90,44 +97,51 @@ document.stalist; return false;
 
   <div id="container">
     <header>
-		<h1>State <span>v</span> State</h1>
+		<h1><span class="rotatel">State</span><span class="v">vs</span><span class="rotater">State</span></h1>
+		
+		<h2 class="enters">TWO STATES ENTER, ONE STATE LEAVES</h2>
+
     </header>
     <div id="main" role="main">
 	
-		<h3>Choose your fighter!</h3>
-		<form name="stalist"><ul class="state-list">
-			<li class="sta1"><input onClick="return KeepCount()" id="cknsw" type="checkbox" name="NSW" /><label for="cknsw"><span>New South Wales</span></label></li>
-			<li class="sta2"><input onClick="return KeepCount()" id="ckvic" type="checkbox" name="VIC" /><label for="ckvic"><span>Victoria</span></label></li>
-			<li class="sta3"><input onClick="return KeepCount()" id="ckqld" type="checkbox" name="QLD" /><label for="ckqld"><span>Queensland</span></label></li>
-			<li class="sta4"><input onClick="return KeepCount()" id="cksa" type="checkbox" name="SA" /><label for="cksa"><span>South Australia</span></label></li>
-			<li class="sta5"><input onClick="return KeepCount()" id="ckwa" type="checkbox" name="WA" /><label for="ckwa"><span>Western Australia</span></label></li>
-			<li class="sta6"><input onClick="return KeepCount()" id="cktas" type="checkbox" name="TAS" /><label for="cktas"><span>Tasmania</span></label></li>
-			<li class="sta7"><input onClick="return KeepCount()" id="cknt" type="checkbox" name="NT" /><label for="cknt"><span>Northern Territory</span></label></li>
-			<li class="sta8"><input onClick="return KeepCount()" id="ckact" type="checkbox" name="ACT" /><label for="ckact"><span>Australian Capital Territory</span></label></li>
+		<h2>Step <span class="num">1</span></h2>
+		<h3>Choose two fighters!</h3>
+		<form name="stalist" action="result.php" method="post"><ul class="state-list">
+			<li class="sta1"><input onClick="return KeepCount()" id="cknsw" type="checkbox" name="NSW" /><label for="cknsw"><span class="bgnsw">New South Wales</span></label></li>
+			<li class="sta2"><input onClick="return KeepCount()" id="ckvic" type="checkbox" name="VIC" /><label for="ckvic"><span class="bgvic">Victoria</span></label></li>
+			<li class="sta3"><input onClick="return KeepCount()" id="ckqld" type="checkbox" name="QLD" /><label for="ckqld"><span class="bgqld">Queensland</span></label></li>
+			<li class="sta4"><input onClick="return KeepCount()" id="cksa" type="checkbox" name="SA" /><label for="cksa"><span class="bgsa">South Australia</span></label></li>
+			<li class="sta5"><input onClick="return KeepCount()" id="ckwa" type="checkbox" name="WA" /><label for="ckwa"><span class="bgwa">Western Australia</span></label></li>
+			<li class="sta6"><input onClick="return KeepCount()" id="cktas" type="checkbox" name="TAS" /><label for="cktas"><span class="bgtas">Tasmania</span></label></li>
+			<li class="sta7"><input onClick="return KeepCount()" id="cknt" type="checkbox" name="NT" /><label for="cknt"><span class="bgnt">Northern Territory</span></label></li>
+			<li class="sta8"><input onClick="return KeepCount()" id="ckact" type="checkbox" name="ACT" /><label for="ckact"><span class="bgact">Australian Capital Territory</span></label></li>
 		</ul>
 		
+		<div class="hline"><span class="classy"></span></div>
+		
+		<h2>Step <span class="num">2</span></h2>
 		<h3>Choose your weapon!</h3>
 		<ul class="cat-list">
-			<li class="cat1"><input onClick="return KeepCount2()" id="cat1" type="checkbox" name="ind1" /><label for="cat1"><span>Gross state product ($)</span></label></li>
+			<li class="cat1"><input onClick="return KeepCount2()" id="cat1" type="checkbox" name="ind1" /><label for="cat1"><span>Gross state product</span></label></li>
 			<li class="cat2"><input onClick="return KeepCount2()" id="cat2" type="checkbox" name="ind2" /><label for="cat2"><span>Median age at death</span></label></li>
 			<li class="cat3"><input onClick="return KeepCount2()" id="cat3" type="checkbox" name="ind3" /><label for="cat3"><span>New car sales</span></label></li>
 			<li class="cat4"><input onClick="return KeepCount2()" id="cat4" type="checkbox" name="ind4" /><label for="cat4"><span>Population</span></label></li>
 			<li class="cat5"><input onClick="return KeepCount2()" id="cat5" type="checkbox" name="ind5" /><label for="cat5"><span>Retail expenditure</span></label></li>
 			<li class="cat6"><input onClick="return KeepCount2()" id="cat6" type="checkbox" name="ind6" /><label for="cat6"><span>Unemployment rate</span></label></li>
 		</ul>
-		
+	</div>
+
+    <footer>
+
+    </footer>
+  </div>	
 		<div class="submit-wrapper">
 			<input id="submit" type="submit" value="FIGHT!" />
 		</div>
 		
 		</form>
 		
-    </div>
-
-    <footer>
-
-    </footer>
-  </div> <!--! end of #container -->
+     <!--! end of #container -->
 
 
   <!-- JavaScript at the bottom for fast page loading -->

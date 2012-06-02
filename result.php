@@ -1,3 +1,158 @@
+<?php
+ini_set('error_reporting', 'E_ALL');
+include ('inc/db.php');
+
+$states = array('NSW' => $_POST['NSW'],
+		'VIC' => $_POST['VIC'],
+		'QLD' => $_POST['QLD'],
+		'SA' =>  $_POST['SA'],
+		'WA' =>  $_POST['WA'],
+		'TAS' => $_POST['TAS'],
+		'NT' =>  $_POST['NT'],
+		'ACT' => $_POST['ACT']);
+
+$ind = array(
+		'1' => $_POST['ind1'],
+		'2' => $_POST['ind2'],
+		'3' => $_POST['ind3'],
+		'4' => $_POST['ind4'],
+		'5' => $_POST['ind5'],
+		'6' => $_POST['ind6']);			
+
+arsort($states);
+$states = array_keys($states);
+
+$state1 = $states[0];
+$state2 = $states[1];
+
+
+// Get population for calculatiing per capita;
+$query = 'SELECT "YEAR", "' . $state1 . '", "' . $state2 . '" FROM "state-population"';
+$result = pg_query($query) or die('Query failed: ' . pg_last_error());
+$result_array = (pg_fetch_all($result));
+$last_element = end($result_array);
+$state1pop = $last_element[$state1];
+$state2pop = $last_element[$state2];
+
+$indicator = array_search('on', $ind);
+
+switch ($indicator) {
+    case 1:
+        $query = 'SELECT "YEAR", "' . $state1 . '", "' . $state2 . '" FROM "state-gross-product"';
+   	 	$result = pg_query($query) or die('Query failed: ' . pg_last_error());
+   	 	$result_array = (pg_fetch_all($result));
+   	 	$last_element = end($result_array);
+		$state1percapita = ($last_element[$state1]*1000000/$state1pop);
+		$state2percapita = ($last_element[$state2]*1000000/$state2pop);
+   	 	if ($state1percapita > $state2percapita){
+   	 		$winner = $state1;
+   	 		$looser = $state2;
+ 			$winValue  = "$".number_format($state1percapita);
+			$loseValue = "$".number_format($state2percapita);
+   	 	} else {
+   	 		$winner = $state2;
+   	 		$looser = $state1;
+ 			$winValue  = "$".number_format($state2percapita);
+			$loseValue = "$".number_format($state1percapita);		    
+   	 	} 
+   	 	$dataset = "Gross Product";
+        break;
+    case 2:
+       	$query = 'SELECT "YEAR", "' . $state1 . '", "' . $state2 . '" FROM "state-median-age-at-death"';
+		$result = pg_query($query) or die('Query failed: ' . pg_last_error());
+		$result_array = (pg_fetch_all($result));
+		$last_element = end($result_array);
+		if ($last_element[$state1] > $last_element[$state2]){
+			$winner = $state1;
+			$looser = $state2; 
+			$winValue  = $last_element[$state1];
+			$loseValue = $last_element[$state2];
+		} else {
+			$winner = $state2;
+			$looser = $state1;
+			$winValue  = $last_element[$state2];
+			$loseValue = $last_element[$state1];		
+		} 
+		$dataset = "Median age at death";
+        break;
+    case 3:
+        $query = 'SELECT "YEAR", "' . $state1 . '", "' . $state2 . '" FROM "state-new-motor-sales"';
+   	 	$result = pg_query($query) or die('Query failed: ' . pg_last_error());
+   	 	$result_array = (pg_fetch_all($result));
+   	 	$last_element = end($result_array);
+		$state1percapita = ($last_element[$state1]/$state1pop);
+		$state2percapita = ($last_element[$state2]/$state2pop);
+   	 	if ($state1percapita > $state2percapita){
+   	 		$winner = $state1;
+   	 		$looser = $state2;
+			$winValue  = number_format($state1percapita, 6);
+			$loseValue = number_format($state2percapita, 6); 
+   	 	} else {
+   	 		$winner = $state2;
+   	 		$looser = $state1;
+			$winValue  = number_format($state2percapita, 6);
+			$loseValue = number_format($state1percapita, 6);		
+   	 	}
+		$dataset = "New motor vehicle sales";
+        break;
+    case 4:
+        $query = 'SELECT "YEAR", "' . $state1 . '", "' . $state2 . '" FROM "state-population"';
+		$result = pg_query($query) or die('Query failed: ' . pg_last_error());
+		$result_array = (pg_fetch_all($result));
+		if ($last_element[$state1] > $last_element[$state2]){
+			$winner = $state1;
+			$looser = $state2; 
+			$winValue  = number_format($last_element[$state1]);
+			$loseValue = number_format($last_element[$state2]);
+		} else {
+			$winner = $state2;
+			$looser = $state1;
+			$winValue  = number_format($last_element[$state2]);
+			$loseValue = number_format($last_element[$state1]);		
+		}
+		$dataset = "Population";
+        break;
+    case 5:
+       	$query = 'SELECT "YEAR", "' . $state1 . '", "' . $state2 . '" FROM "state-retail-expenditure"';
+		$result = pg_query($query) or die('Query failed: ' . pg_last_error());
+		$result_array = (pg_fetch_all($result));
+		$last_element = end($result_array);
+		$state1percapita = ($last_element[$state1]*1000000/$state1pop);
+		$state2percapita = ($last_element[$state2]*1000000/$state2pop);
+   	 	if ($state1percapita > $state2percapita){
+   	 		$winner = $state1;
+   	 		$looser = $state2;
+ 			$winValue  = "$".number_format($state1percapita);
+			$loseValue = "$".number_format($state2percapita);
+   	 	} else {
+   	 		$winner = $state2;
+   	 		$looser = $state1;
+ 			$winValue  = "$".number_format($state2percapita);
+			$loseValue = "$".number_format($state1percapita);		    
+   	 	}
+		$dataset = "Retail Expenditure";
+        break;
+    case 6:
+        $query = 'SELECT "YEAR", "' . $state1 . '", "' . $state2 . '" FROM "state-unemployment-rate"';
+		$result = pg_query($query) or die('Query failed: ' . pg_last_error());
+		$result_array = (pg_fetch_all($result));
+		$last_element = end($result_array);
+		if ($last_element[$state1] > $last_element[$state2]){
+			$winner = $state1;
+			$looser = $state2; 
+			$winValue  = number_format($last_element[$state1], 2) . "%";
+			$loseValue = number_format($last_element[$state2], 2) . "%";
+		} else {                                                
+			$winner = $state2;                                  
+			$looser = $state1;                                  
+			$winValue  = number_format($last_element[$state2], 2) . "%";
+			$loseValue = number_format($last_element[$state1], 2) . "%";		
+		}
+		$dataset = "Unemployment Rate";
+        break;
+}
+
+?>
 <!doctype html>
 <!-- Conditional comment for mobile ie7 blogs.msdn.com/b/iemobile/ -->
 <!--[if IEMobile 7 ]>    <html class="no-js iem7" lang="en"> <![endif]-->
@@ -57,17 +212,17 @@
 		
 		<div class="thirds">
 			<div class="first">
-				<h2><?php //States status ?></h2>
-				<h3><?php //State name ?></h3>
+				<h2><?php echo $winner; ?></h2>
+				<h3><?php echo $looser; ?></h3>
 			</div>
 		</div>
 		
 		<div class="thirds">
 			<div class="result">
-				<h2>Your weapon was: <?php //Dataset name ?></h2>
+				<h2>Your weapon was: <?php echo $dataset; ?></h2>
 				
-				<span class="winner"><?php //Winning number ?></span>
-				<span class="loser"><?php //Losing number ?></span>
+				<span class="winner"><?php echo $winValue; ?></span>
+				<span class="loser"><?php echo $loseValue; ?></span>
 			</div>
 		</div>
 		
@@ -75,6 +230,14 @@
 			<div class="second">
 				<h2><?php //States status ?></h2>
 				<h3><?php //Other state name ?></h3>
+				<table id="result">
+					<tr><th>Year</th><th><?php echo $winner; ?></th><th><?php echo $looser; ?></th></tr>
+					<?php
+						while ($row = pg_fetch_row($result)) {
+					  		echo "<tr><th>$row[0]</th><td>$row[1]</td><td>$row[2]</td></tr>";
+						}
+					?>
+				</table>
 			</div>
 		</div>
 		

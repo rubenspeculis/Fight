@@ -301,10 +301,21 @@ textarea[contenteditable] {-webkit-appearance: none;}
 
 /*============================================================================ */
 
-.state-list li, .cat-list li {
+body {
+	background-color: #1C3764;
+}
+
+.state-list li {
 	list-style: none;
 	display: inline-block;
 	width: 12%;
+}
+
+.cat-list li {
+	list-style: none;
+	display: inline-block;
+	width: 16%;
+	text-align: center;
 }
 
 .sta1 label span, 
@@ -316,9 +327,10 @@ textarea[contenteditable] {-webkit-appearance: none;}
 .sta7 label span, 
 .sta8 label span {
 	background-repeat: no-repeat;
-	height: 120px;
+	height: 70px;
 	background-position: bottom;
 	display: block;
+	text-align: center;
 }
 
 .sta1 label span { background-image: url('images/nsw.png'); }
@@ -330,6 +342,11 @@ textarea[contenteditable] {-webkit-appearance: none;}
 .sta7 label span { background-image: url('images/nt.png'); }
 .sta8 label span { background-image: url('images/act.png'); }
 
+/*For the love of Xenu, DO NOT FUCKING DELETE ME!!!! */
+h1 {
+
+}
+
 @font-face {
     font-family: 'DistrictRegular';
     src: url('district-webfont.eot');
@@ -339,28 +356,163 @@ textarea[contenteditable] {-webkit-appearance: none;}
          url('district-webfont.svg#DistrictRegular') format('svg');
     font-weight: normal;
     font-style: normal;
-
 }
 
-h1, #submit {
-	font-family: 'DistrictRegular';
+h1 {
+	font-family: 'OldStamperRegular';
 	text-align: center;
 	font-size: 60px;
 	margin: 0;
 	padding: 0;
 }
 
-h1 span {
+h1 span.v {
 	font-size: 30px;
+	padding: 0 17px;
+	line-height: 0px;
+	display: inline-block;
 }
 
 #submit {
 	border: none;
 	background-color: transparent;
+	font-family: 'OldStamperRegular';
+	text-align: center;
+	font-size: 60px;
+	/*background-image: url('images/starburst.png');*/
+	height: 200px;
+	width: 200px;
+	color: #000;
+	/*text-shadow: 2px 2px 2px #fff, -2px -2px 2px #fff;*/
 }
 
 .submit-wrapper {
 	margin-left: auto;
 	margin-right: auto;
-	width: 180px;
+	width: 200px;
+	border-radius: 100px;
+	background-color: #fff;
+	box-shadow: 5px 5px 5px #000;
+	margin-top: 10px;
+	height: 200px;
+}
+
+.submit-wrapper:hover {
+	box-shadow: 5px 5px 2px #000;
+}
+
+.cat1 span,
+.cat2 span,
+.cat3 span,
+.cat4 span,
+.cat5 span,
+.cat6 span {
+	padding-left: 5px;
+	font-size: 15px;
+}
+
+:checked + label span {
+	font-weight: bold;
+}
+
+.cat-list li input, .state-list li input {
+	display: none;
+}
+
+:checked + label span.bgnsw { background-image: url('images/nsw-active.png'); }
+:checked + label span.bgvic { background-image: url('images/vic-active.png'); }
+:checked + label span.bgqld { background-image: url('images/qld-active.png'); }
+:checked + label span.bgsa { background-image: url('images/sa-active.png'); }
+:checked + label span.bgwa { background-image: url('images/wa-active.png'); }
+:checked + label span.bgtas { background-image: url('images/tas-active.png'); }
+:checked + label span.bgnt { background-image: url('images/nt-active.png'); }
+:checked + label span.bgact { background-image: url('images/act-active.png'); }
+
+#container {
+	background-color: #fff;
+	padding: 4px;
+	margin: 4px;
+	border-radius: 5px;
+	min-width: 912px;
+}
+
+@font-face {
+    font-family: 'OldStamperRegular';
+    src: url('old_stamper-webfont.eot');
+    src: url('old_stamper-webfont.eot?#iefix') format('embedded-opentype'),
+         url('old_stamper-webfont.woff') format('woff'),
+         url('old_stamper-webfont.ttf') format('truetype'),
+         url('old_stamper-webfont.svg#OldStamperRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+h1 span.rotatel, h1 span.rotater {
+	display: inline-block;
+	padding-top: 18px;
+	color: #000;
+}
+
+h1 span.rotatel {
+	-moz-transform: scale(1) rotate(-15deg) translate(0px, 0px) skew(0deg, 0deg);
+	-webkit-transform: scale(1) rotate(-15deg) translate(0px, 0px) skew(0deg, 0deg);
+	-o-transform: scale(1) rotate(-15deg) translate(0px, 0px) skew(0deg, 0deg);
+	-ms-transform: scale(1) rotate(-15deg) translate(0px, 0px) skew(0deg, 0deg);
+	transform: scale(1) rotate(-15deg) translate(0px, 0px) skew(0deg, 0deg);
+}
+
+h1 span.rotater {
+	-moz-transform: scale(1) rotate(15deg) translate(0px, 0px) skew(0deg, 0deg);
+	-webkit-transform: scale(1) rotate(15deg) translate(0px, 0px) skew(0deg, 0deg);
+	-o-transform: scale(1) rotate(15deg) translate(0px, 0px) skew(0deg, 0deg);
+	-ms-transform: scale(1) rotate(15deg) translate(0px, 0px) skew(0deg, 0deg);
+	transform: scale(1) rotate(15deg) translate(0px, 0px) skew(0deg, 0deg);
+}
+
+h2 span.num {
+	display: inline-block;
+	background-color: #1C3764;
+	border-radius: 15px;
+	width: 30px;
+	height: 30px;
+	text-align: center;
+	color: #fff;
+	line-height: 31px;
+}
+
+.hline {
+	height: 2px;
+	background: #1C3764;
+	background: -moz-linear-gradient(left,  #fff 0%, #466d82 5%, #0e3649 50%, #466d82 95%, #fff 100%);
+	background: -webkit-gradient(linear, left top, right top, color-stop(0%,#fff), color-stop(5%,#466d82), color-stop(50%,#0e3649), color-stop(95%,#466d82), color-stop(100%,#fff));
+	background: -webkit-linear-gradient(left,  #fff 0%,#466d82 5%,#0e3649 50%,#466d82 95%,#fff 100%);
+	background: -o-linear-gradient(left,  #fff 0%,#466d82 5%,#0e3649 50%,#466d82 95%,#fff 100%);
+	background: -ms-linear-gradient(left,  #fff 0%,#466d82 5%,#0e3649 50%,#466d82 95%,#fff 100%);
+	background: linear-gradient(left,  #fff 0%,#466d82 5%,#0e3649 50%,#466d82 95%,#fff 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fff', endColorstr='#fff',GradientType=1 );
+	width: 90%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.enters {
+	text-align: center;
+	margin-bottom: 0;
+}
+
+ul.state-list, ul.cat-list {
+	margin-left: -45px;
+}
+
+.submit-wrapper h2 {
+	display: inline-block;
+	position: absolute;
+	width: 200px;
+	height: 100px;
+	text-align: center;
+	font-size: 250px;
+	line-height: 0px;
+	color: #9A2829;
+	margin-top: 100px;
 }
