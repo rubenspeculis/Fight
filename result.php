@@ -55,7 +55,8 @@ switch ($indicator) {
  			$winValue  = "$".number_format($state2percapita);
 			$loseValue = "$".number_format($state1percapita);		    
    	 	} 
-   	 	$dataset = "Gross Product";
+   	 	$dataset = "Gross Product<br />Per Capita";
+		$datasetIcon = "gros-icon";
         break;
     case 2:
        	$query = 'SELECT "YEAR", "' . $state1 . '", "' . $state2 . '" FROM "state-median-age-at-death"';
@@ -73,7 +74,8 @@ switch ($indicator) {
 			$winValue  = $last_element[$state2];
 			$loseValue = $last_element[$state1];		
 		} 
-		$dataset = "Median age at death";
+		$dataset = "Age at Death<br />Median";
+		$datasetIcon = "deat-icon";
         break;
     case 3:
         $query = 'SELECT "YEAR", "' . $state1 . '", "' . $state2 . '" FROM "state-new-motor-sales"';
@@ -93,7 +95,8 @@ switch ($indicator) {
 			$winValue  = number_format($state2percapita, 6);
 			$loseValue = number_format($state1percapita, 6);		
    	 	}
-		$dataset = "New motor vehicle sales";
+		$dataset = "New motor vehicle sales<br />Per Capita";
+		$datasetIcon = "cars-icon";
         break;
     case 4:
         $query = 'SELECT "YEAR", "' . $state1 . '", "' . $state2 . '" FROM "state-population"';
@@ -111,6 +114,7 @@ switch ($indicator) {
 			$loseValue = number_format($last_element[$state1]);		
 		}
 		$dataset = "Population";
+		$datasetIcon = "popu-icon";
         break;
     case 5:
        	$query = 'SELECT "YEAR", "' . $state1 . '", "' . $state2 . '" FROM "state-retail-expenditure"';
@@ -130,14 +134,15 @@ switch ($indicator) {
  			$winValue  = "$".number_format($state2percapita);
 			$loseValue = "$".number_format($state1percapita);		    
    	 	}
-		$dataset = "Retail Expenditure";
+		$dataset = "Retail Expenditure<br />Per Capita";
+		$datasetIcon = "reta-icon";
         break;
     case 6:
         $query = 'SELECT "YEAR", "' . $state1 . '", "' . $state2 . '" FROM "state-unemployment-rate"';
 		$result = pg_query($query) or die('Query failed: ' . pg_last_error());
 		$result_array = (pg_fetch_all($result));
 		$last_element = end($result_array);
-		if ($last_element[$state1] > $last_element[$state2]){
+		if ($last_element[$state1] < $last_element[$state2]){
 			$winner = $state1;
 			$looser = $state2; 
 			$winValue  = number_format($last_element[$state1], 2) . "%";
@@ -149,8 +154,34 @@ switch ($indicator) {
 			$loseValue = number_format($last_element[$state1], 2) . "%";		
 		}
 		$dataset = "Unemployment Rate";
+		$datasetIcon = "unem-icon";
         break;
 }
+
+if($winner=="NSW"){$winNice = "New South Wales"; $winflag = "flag-nsw";}
+if($looser=="NSW"){$loseNice = "New South Wales"; $loseflag = "flag-nsw";}
+
+if($winner=="VIC"){$winNice = "Victoria"; $winflag = "flag-vic";}
+if($looser=="VIC"){$loseNice = "Victoria"; $loseflag = "flag-vic";}
+
+if($winner=="QLD"){$winNice = "Queensland"; $winflag = "flag-qld";}
+if($looser=="QLD"){$loseNice = "Queensland"; $loseflag = "flag-qld";}
+
+if($winner=="SA"){$winNice = "South Australia"; $winflag = "flag-sa";}
+if($looser=="SA"){$loseNice = "South Australia"; $loseflag = "flag-sa";}
+
+if($winner=="WA"){$winNice = "Western Australia"; $winflag = "flag-wa";}
+if($looser=="WA"){$loseNice = "Western Australia"; $loseflag = "flag-wa";}
+
+if($winner=="TAS"){$winNice = "Tasmania"; $winflag = "flag-tas";}
+if($looser=="TAS"){$loseNice = "Tasmania"; $loseflag = "flag-tas";}
+
+if($winner=="NT"){$winNice = "Northern Territory"; $winflag = "flag-nt";}
+if($looser=="NT"){$loseNice = "Northern Territory"; $loseflag = "flag-nt";}
+
+if($winner=="ACT"){$winNice = "Australian Capital Territory"; $winflag = "flag-act";}
+if($looser=="ACT"){$loseNice = "Australian Capital Territory"; $loseflag = "flag-act";}
+
 
 ?>
 <!doctype html>
@@ -198,48 +229,69 @@ switch ($indicator) {
   <!-- All JavaScript at the bottom, except for Modernizr which enables HTML5 elements & feature detects -->
   <script src="js/libs/modernizr-2.0.6.min.js"></script>
   
+  <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if necessary -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.1.min.js"><\/script>')</script>
+  
+  <!-- HighCharts and Rubens HighCharts Addon -->
+  <script src="js/highcharts.js"></script>
+  <script src="js/modules/exporting.js"></script>
+  <script src="js/high.js"></script>
+  
+  
 </head>
 
 <body>
 
   <div id="container">
     <header>
-		<h1>State <span>v</span> State</h1>
+	<a href="/fight">
+		<h1><span class="rotatel">State</span><span class="v">vs</span><span class="rotater">State</span></h1>
+		
+		<h2 class="enters">TWO STATES ENTER, ONE STATE LEAVES</h2>
+	</a>
     </header>
-    <div id="main" role="main">
 	
-		<h2>You're combatants are:</h2>
+    <div id="main" role="main">
 		
 		<div class="thirds">
 			<div class="first">
-				<h2><?php echo $winner; ?></h2>
-				<h3><?php echo $looser; ?></h3>
+				<h2>The <span>WINNER</span> with <span><?php echo $winValue; ?></span> is:</h2>
+				<h3><?php echo $winNice; ?></h3>
+				<div class="<?php echo $winflag; ?>"></div>
 			</div>
 		</div>
 		
 		<div class="thirds">
 			<div class="result">
-				<h2>Your weapon was: <?php echo $dataset; ?></h2>
-				
-				<span class="winner"><?php echo $winValue; ?></span>
-				<span class="loser"><?php echo $loseValue; ?></span>
+				<h2><!--Your weapon was:-->&nbsp;</h2>
+				<h2><?php echo $dataset; ?></h2>
+				<div class="datasetIcon <?php echo $datasetIcon; ?>"></div>
 			</div>
 		</div>
 		
 		<div class="thirds">
 			<div class="second">
-				<h2><?php //States status ?></h2>
-				<h3><?php //Other state name ?></h3>
-				<table id="result">
-					<tr><th>Year</th><th><?php echo $winner; ?></th><th><?php echo $looser; ?></th></tr>
-					<?php
-						while ($row = pg_fetch_row($result)) {
-					  		echo "<tr><th>$row[0]</th><td>$row[1]</td><td>$row[2]</td></tr>";
-						}
-					?>
-				</table>
+				<h2>The <span>LOSER</span> with <span><?php echo $loseValue; ?></span> is:</h2>
+				<h3><?php echo $loseNice; ?></h3>
+				<div class="<?php echo $loseflag; ?>"></div>
 			</div>
 		</div>
+		
+		<div id="rendertable"></div>
+		
+		<table id="result">
+			<?php
+
+					print "<thead><tr><th>Year</th><th>" . $loseNice . "</th><th>" . $winNice . "</th></tr></thead><tbody>";
+				
+			?>
+			<?php
+				while ($row = pg_fetch_row($result)) {
+					echo "<tr><th>$row[0]</th><td>$row[1]</td><td>$row[2]</td></tr>";
+				}
+			?></tbody>
+		</table>
 		
 		
     </div>
@@ -251,10 +303,6 @@ switch ($indicator) {
 
 
   <!-- JavaScript at the bottom for fast page loading -->
-
-  <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if necessary -->
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-  <script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.1.min.js"><\/script>')</script>
 
   <!-- scripts concatenated and minified via ant build script-->
   <script src="js/helper.js"></script>

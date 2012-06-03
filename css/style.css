@@ -409,6 +409,10 @@ h1 span.v {
 .cat6 span {
 	padding-left: 5px;
 	font-size: 15px;
+	padding-top: 15px;
+	padding-bottom: 58px;
+	width: 100px;
+	display: inline-block;
 }
 
 :checked + label span {
@@ -422,7 +426,7 @@ h1 span.v {
 :checked + label span.bgnsw { background-image: url('images/nsw-active.png'); }
 :checked + label span.bgvic { background-image: url('images/vic-active.png'); }
 :checked + label span.bgqld { background-image: url('images/qld-active.png'); }
-:checked + label span.bgsa { background-image: url('images/sa-active.png'); }
+:checked + label span.bgsa	{ background-image: url('images/sa-active.png'); }
 :checked + label span.bgwa { background-image: url('images/wa-active.png'); }
 :checked + label span.bgtas { background-image: url('images/tas-active.png'); }
 :checked + label span.bgnt { background-image: url('images/nt-active.png'); }
@@ -515,4 +519,86 @@ ul.state-list, ul.cat-list {
 	line-height: 0px;
 	color: #9A2829;
 	margin-top: 100px;
+}
+
+#result {
+	display: none;
+}
+
+#rendertable {
+	width: 98%;
+}
+
+.thirds {
+	width: 32%;
+	float: left;
+}
+
+.thirds h2, .thirds h3 {
+	text-align: center;
+}
+
+.flag-nsw	{ background-image: url('images/nsw-active.png'); }
+.flag-vic	{ background-image: url('images/vic-active.png'); }
+.flag-qld	{ background-image: url('images/qld-active.png'); }
+.flag-sa	{ background-image: url('images/sa-active.png'); }
+.flag-wa	{ background-image: url('images/wa-active.png'); }
+.flag-tas	{ background-image: url('images/tas-active.png'); }
+.flag-nt	{ background-image: url('images/nt-active.png'); }
+.flag-act	{ background-image: url('images/act-active.png'); }
+
+.flag-nsw, 
+.flag-vic, 
+.flag-qld, 
+.flag-sa, 
+.flag-wa, 
+.flag-tas ,
+.flag-nt, 
+.flag-act {
+	width: 100px;
+	height: 50px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+header a, header a:hover {
+	color: #000 !Important;
+	text-decoration: none;
+}
+
+.cat1 label span, 
+.cat2 label span, 
+.cat3 label span, 
+.cat4 label span, 
+.cat5 label span, 
+.cat6 label span {
+	background-repeat: no-repeat;
+	background-position: 50% 100%;
+}
+
+
+
+.cat1 label span { background-image: url('images/gross.png'); }
+.cat2 label span { background-image: url('images/death.png'); }
+.cat3 label span { background-image: url('images/car.png'); }
+.cat4 label span { background-image: url('images/population.png'); }
+.cat5 label span { background-image: url('images/retail.png'); }
+.cat6 label span { background-image: url('images/unemployment.png'); }
+
+.gros-icon, :checked + label span.catspan1	{ background-image: url('images/gross-active.png'); }
+.deat-icon, :checked + label span.catspan2	{ background-image: url('images/death-active.png'); }
+.cars-icon, :checked + label span.catspan3	{ background-image: url('images/car-active.png'); }
+.popu-icon, :checked + label span.catspan4	{ background-image: url('images/population-active.png'); }
+.reta-icon, :checked + label span.catspan5	{ background-image: url('images/retail-active.png'); }
+.unem-icon, :checked + label span.catspan6	{ background-image: url('images/unemployment-active.png'); }
+
+.datasetIcon {
+	width: 100px;
+	height: 50px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#main {
+	margin-top: -17px;
 }

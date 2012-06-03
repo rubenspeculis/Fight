@@ -97,10 +97,11 @@ document.stalist; return false;
 
   <div id="container">
     <header>
+	<a href="/fight">
 		<h1><span class="rotatel">State</span><span class="v">vs</span><span class="rotater">State</span></h1>
 		
 		<h2 class="enters">TWO STATES ENTER, ONE STATE LEAVES</h2>
-
+	</a>
     </header>
     <div id="main" role="main">
 	
@@ -122,12 +123,12 @@ document.stalist; return false;
 		<h2>Step <span class="num">2</span></h2>
 		<h3>Choose your weapon!</h3>
 		<ul class="cat-list">
-			<li class="cat1"><input onClick="return KeepCount2()" id="cat1" type="checkbox" name="ind1" /><label for="cat1"><span>Gross state product</span></label></li>
-			<li class="cat2"><input onClick="return KeepCount2()" id="cat2" type="checkbox" name="ind2" /><label for="cat2"><span>Median age at death</span></label></li>
-			<li class="cat3"><input onClick="return KeepCount2()" id="cat3" type="checkbox" name="ind3" /><label for="cat3"><span>New car sales</span></label></li>
-			<li class="cat4"><input onClick="return KeepCount2()" id="cat4" type="checkbox" name="ind4" /><label for="cat4"><span>Population</span></label></li>
-			<li class="cat5"><input onClick="return KeepCount2()" id="cat5" type="checkbox" name="ind5" /><label for="cat5"><span>Retail expenditure</span></label></li>
-			<li class="cat6"><input onClick="return KeepCount2()" id="cat6" type="checkbox" name="ind6" /><label for="cat6"><span>Unemployment rate</span></label></li>
+			<li class="cat1"><input onClick="return KeepCount2()" id="cat1" type="checkbox" name="ind1" /><label for="cat1"><span class="catspan1">Gross state product</span></label></li>
+			<li class="cat2"><input onClick="return KeepCount2()" id="cat2" type="checkbox" name="ind2" /><label for="cat2"><span class="catspan2">Median age at death</span></label></li>
+			<li class="cat3"><input onClick="return KeepCount2()" id="cat3" type="checkbox" name="ind3" /><label for="cat3"><span class="catspan3">New car sales</span></label></li>
+			<li class="cat4"><input onClick="return KeepCount2()" id="cat4" type="checkbox" name="ind4" /><label for="cat4"><span class="catspan4">Population</span></label></li>
+			<li class="cat5"><input onClick="return KeepCount2()" id="cat5" type="checkbox" name="ind5" /><label for="cat5"><span class="catspan5">Retail expenditure</span></label></li>
+			<li class="cat6"><input onClick="return KeepCount2()" id="cat6" type="checkbox" name="ind6" /><label for="cat6"><span class="catspan6">Unemployment rate</span></label></li>
 		</ul>
 	</div>
 
