@@ -242,83 +242,77 @@ if($looser=="ACT"){$loseNice = "Australian Capital Territory"; $loseflag = "flag
 </head>
 
 <body>
+	<div id="container">
+		<header>
+			<a href="/fight">
+				<h1><span class="rotatel">State</span><span class="v">vs</span><span class="rotater">State</span></h1>
+				<h2 class="enters">TWO STATES ENTER, ONE STATE LEAVES</h2>
+			</a>
+		</header>
 
-  <div id="container">
-    <header>
-	<a href="/fight">
-		<h1><span class="rotatel">State</span><span class="v">vs</span><span class="rotater">State</span></h1>
-		
-		<h2 class="enters">TWO STATES ENTER, ONE STATE LEAVES</h2>
-	</a>
-    </header>
-	
-    <div id="main" role="main">
-		
-		<div class="thirds">
-			<div class="first">
-				<h2>The <span>WINNER</span> with <span><?php echo $winValue; ?></span> is:</h2>
-				<h3><?php echo $winNice; ?></h3>
-				<div class="<?php echo $winflag; ?>"></div>
+		<div id="main" role="main">
+			<div class="thirds">
+				<div class="first">
+					<h2>The <span>WINNER</span> with <span><?php echo $winValue; ?></span> is:</h2>
+					<h3><?php echo $winNice; ?></h3>
+					<div class="<?php echo $winflag; ?>"></div>
+				</div>
 			</div>
-		</div>
-		
-		<div class="thirds">
-			<div class="result">
-				<h2><!--Your weapon was:-->&nbsp;</h2>
-				<h2><?php echo $dataset; ?></h2>
-				<div class="datasetIcon <?php echo $datasetIcon; ?>"></div>
-			</div>
-		</div>
-		
-		<div class="thirds">
-			<div class="second">
-				<h2>The <span>LOSER</span> with <span><?php echo $loseValue; ?></span> is:</h2>
-				<h3><?php echo $loseNice; ?></h3>
-				<div class="<?php echo $loseflag; ?>"></div>
-			</div>
-		</div>
-		
-		<div id="rendertable"></div>
-		
-		<table id="result">
-			<?php
 
-					print "<thead><tr><th>Year</th><th>" . $loseNice . "</th><th>" . $winNice . "</th></tr></thead><tbody>";
+			<div class="thirds">
+				<div class="result">
+					<h2><!--Your weapon was:-->&nbsp;</h2>
+					<h2><?php echo $dataset; ?></h2>
+					<div class="datasetIcon <?php echo $datasetIcon; ?>"></div>
+				</div>
+			</div>
+
+			<div class="thirds">
+				<div class="second">
+					<h2>The <span>LOSER</span> with <span><?php echo $loseValue; ?></span> is:</h2>
+					<h3><?php echo $loseNice; ?></h3>
+					<div class="<?php echo $loseflag; ?>"></div>
+				</div>
+			</div>
+
+			<div id="rendertable"></div>
+
+			<table id="result">
+				<?php print "<thead><tr><th>Year</th><th>" . $loseNice . "</th><th>" . $winNice . "</th></tr></thead><tbody>"; ?>
 				
-			?>
-			<?php
+				<?php
 				while ($row = pg_fetch_row($result)) {
-					echo "<tr><th>$row[0]</th><td>$row[1]</td><td>$row[2]</td></tr>";
+				echo "<tr><th>$row[0]</th><td>$row[1]</td><td>$row[2]</td></tr>";
 				}
-			?></tbody>
-		</table>
-		
-		
-    </div>
+				?>
+				</tbody>
+			</table>
+		</div>
+	</div> <!--! end of #container -->
 
-    <footer>
+	<!-- JavaScript at the bottom for fast page loading -->
 
-    </footer>
-  </div> <!--! end of #container -->
+	<!-- scripts concatenated and minified via ant build script-->
+	<script src="js/helper.js"></script>
+	<!-- end scripts-->
 
+	<!-- Debugger - remove for production -->
+	<!-- <script src="https://getfirebug.com/firebug-lite.js"></script> -->
 
-  <!-- JavaScript at the bottom for fast page loading -->
+	<!-- Asynchronous Google Analytics snippet. Change UA-XXXXX-X to be your site's ID.
+	mathiasbynens.be/notes/async-analytics-snippet -->
+	<script type="text/javascript">
 
-  <!-- scripts concatenated and minified via ant build script-->
-  <script src="js/helper.js"></script>
-  <!-- end scripts-->
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-32313978-1']);
+	_gaq.push(['_trackPageview']);
 
-  <!-- Debugger - remove for production -->
-  <!-- <script src="https://getfirebug.com/firebug-lite.js"></script> -->
+	(function() {
+	var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
 
-  <!-- Asynchronous Google Analytics snippet. Change UA-XXXXX-X to be your site's ID.
-       mathiasbynens.be/notes/async-analytics-snippet -->
-  <script>
-    var _gaq=[["_setAccount","UA-XXXXX-X"],["_trackPageview"]];
-    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;
-    g.src=("https:"==location.protocol?"//ssl":"//www")+".google-analytics.com/ga.js";
-    s.parentNode.insertBefore(g,s)}(document,"script"));
-  </script>
-
+	</script>
 </body>
 </html>
